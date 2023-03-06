@@ -1,9 +1,14 @@
 {
-    "POAP": {
-        "network": "mainnet",
-        "address": "0x22C1f6050E56d2876009903609a2cC3fEf83B415",
-        "startBlock": 7844214,
-        "file": "POAP",
-        "tokenEvent": "EventToken(uint256,uint256)"
-    }
+  "POAP": {
+    "network": "mainnet",
+    "address": "0x22C1f6050E56d2876009903609a2cC3fEf83B415",
+    "startBlock": 7844214,
+    "file": "POAP",
+    "tokenEvent": "EventToken(uint256,uint256)"
+  },
+  "DeveloperDAO": {
+    "network": "mainnet",
+    "address": "0x25ed58c027921E14D86380eA2646E3a1B5C55A8b",
+    "startBlock": 13153967
+  }
 }

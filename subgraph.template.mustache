@@ -1,0 +1,76 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  {{#POAP}}
+  - kind: ethereum
+    name: POAP
+    network: {{ POAP.network }}
+    source:
+      address: "{{ POAP.address }}"
+      abi: POAP
+      startBlock: {{ POAP.startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Account
+        - POAPToken
+        - POAPEvent
+      abis:
+        - name: POAP
+          file: ./abis/{{ POAP.file }}.json
+      eventHandlers:
+        - event: {{ POAP.tokenEvent }}
+          handler: handleEventToken
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/poap.ts
+  {{/POAP}}
+  {{#DeveloperDAO}}
+  - kind: ethereum
+    name: DeveloperDAO
+    network: {{ DeveloperDAO.network }}
+    source:
+      address: "{{ DeveloperDAO.address }}"
+      abi: DeveloperDAO
+      startBlock: {{ DeveloperDAO.startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Account
+        - DeveloperDAOToken
+      abis:
+        - name: DeveloperDAO
+          file: ./abis/DeveloperDAO.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/developerDao.ts
+  {{/DeveloperDAO}}
+  {{#Buildspace}}
+  - kind: ethereum
+    name: Buildspace
+    network: {{ Buildspace.network }}
+    source:
+      address: "{{ Buildspace.address }}"
+      abi: Buildspace
+      startBlock: {{ Buildspace.startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Account
+        - BuildspaceToken
+      abis:
+        - name: Buildspace
+          file: ./abis/Buildspace.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/buildspace.ts
+  {{/Buildspace}}
