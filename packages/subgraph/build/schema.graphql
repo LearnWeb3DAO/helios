@@ -1,0 +1,42 @@
+type Account @entity {
+  id: ID!
+  poapTokens: [POAPToken!]! @derivedFrom(field: "owner")
+  devDaoTokens: [DeveloperDAOToken!]! @derivedFrom(field: "owner")
+  buildspaceTokens: [BuildspaceToken!]! @derivedFrom(field: "owner")
+  tokensOwned: BigInt!
+}
+
+# POAP
+type POAPToken @entity {
+  id: ID!
+  owner: Account!
+  event: POAPEvent
+  transferCount: BigInt!
+  created: BigInt!
+  mintOrder: BigInt
+}
+
+type POAPEvent @entity {
+  id: ID!
+  tokens: [POAPToken!]! @derivedFrom(field: "event")
+  tokenCount: BigInt!
+  created: BigInt!
+  transferCount: BigInt!
+  tokenMints: BigInt!
+}
+
+# Developer DAO
+type DeveloperDAOToken @entity {
+  id: ID!
+  owner: Account!
+  transferCount: BigInt!
+  created: BigInt!
+}
+
+# Buildspace
+type BuildspaceToken @entity {
+  id: ID!
+  owner: Account!
+  transferCount: BigInt!
+  created: BigInt!
+}
